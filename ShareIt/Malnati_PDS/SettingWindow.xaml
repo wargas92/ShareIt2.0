@@ -1,0 +1,246 @@
+﻿<Window x:Class="Malnati_PDS.SettingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Malnati_PDS"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        xmlns:properties="clr-namespace:Malnati_PDS.Properties"
+        Title="ShareIt Setting"  Height="431" Width="648"
+        ResizeMode="NoResize"
+        Icon="Icons/share.ico"
+        Closing="Window_Closing"
+        >
+    <Window.Resources>
+
+
+        <sys:Int32 x:Key="NameProfileRow">2</sys:Int32>
+        <sys:Int32 x:Key="ImgProfileRow">1</sys:Int32>
+        <sys:Int32 x:Key="PathRow">3</sys:Int32>
+        <sys:Int32 x:Key="IncognitoRow">4</sys:Int32>
+        <sys:Int32 x:Key="RequestRow">5</sys:Int32>
+        
+        <sys:Int32 x:Key="SelfDiscoveryRow">6</sys:Int32>
+        <sys:Int32 x:Key="DropFileRow">7</sys:Int32>
+
+        <sys:Double x:Key="ImageDimension">32</sys:Double>
+        <sys:Double x:Key="ProfileImageDimension">45</sys:Double>
+
+
+        <sys:Double x:Key="FontSize">14</sys:Double>
+        <sys:Int32 x:Key="ButtonColumn">9</sys:Int32>
+        <sys:Int32 x:Key="IconColumn">0</sys:Int32>
+        <sys:Int32 x:Key="TextColumn">2</sys:Int32>
+        <sys:Int32 x:Key="ColumnSpan">6</sys:Int32>
+       
+        
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.7*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1.3*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <materialDesign:PackIcon Width="{StaticResource ImageDimension}" Height="{StaticResource ImageDimension}" Grid.Row="{StaticResource NameProfileRow}" Grid.Column="{StaticResource IconColumn}"  Kind="Account" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="{StaticResource NameProfileRow}" Grid.Column="{StaticResource TextColumn}"  Grid.ColumnSpan="{StaticResource ColumnSpan}" 
+				 IsEnabled="False"  
+                 Margin="10,0,10,0"
+                 Name="NameTextBox"
+                 FontSize="{StaticResource FontSize}"
+				    materialDesign:HintAssist.Hint="Name"
+                 VerticalAlignment="Center" 
+                 Text="{Binding Source={x:Static properties:Settings.Default},Path=Name}"
+                 
+                 >
+        </TextBox>
+        <Ellipse Width="{StaticResource ProfileImageDimension}" Height="{StaticResource ProfileImageDimension}" 
+                  Grid.Row="{StaticResource ImgProfileRow}" Grid.Column="{StaticResource IconColumn}" HorizontalAlignment="Right"
+                 >
+            <Ellipse.Fill>
+                <ImageBrush Stretch="UniformToFill" ImageSource="{Binding ElementName=ImageTextBox, Path=Text}"/>
+            </Ellipse.Fill>
+        </Ellipse>
+        <TextBox  Grid.Row="{StaticResource ImgProfileRow}" Grid.Column="{StaticResource TextColumn}"  Grid.ColumnSpan="{StaticResource ColumnSpan}" 
+                 IsReadOnly ="True"
+                 Margin="10,0,10,5"
+				    x:Name="ImageTextBox"
+                 FontSize="{StaticResource FontSize}"
+				    materialDesign:HintAssist.Hint="Profile Image Path"
+                 VerticalAlignment="Bottom" 
+                 Text="{Binding Source={x:Static properties:Settings.Default},Path=Profile_Image}"
+                 >
+        </TextBox>
+        <Button Grid.Row="{StaticResource ImgProfileRow}" Grid.Column="{StaticResource ButtonColumn}"  Name="Image_Profile" 
+                HorizontalAlignment="Left" VerticalAlignment="Bottom"  
+                FontSize="{StaticResource FontSize}"
+                Margin="0,0,0,5"
+                Padding="0,0,0,0"
+                 Click="Image_Profile_Click"
+                Style="{StaticResource MaterialDesignFlatButton}">
+            Browse
+        </Button>
+        <materialDesign:PackIcon Width="{StaticResource ImageDimension}" Height="{StaticResource ImageDimension}" Grid.Row="{StaticResource PathRow}" Grid.Column="{StaticResource IconColumn}"  Kind="Download" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="{StaticResource PathRow}" Grid.Column="{StaticResource TextColumn}"  Grid.ColumnSpan="{StaticResource ColumnSpan}" 
+				    x:Name="PathText"
+                 FontSize="{StaticResource FontSize}"
+				    materialDesign:HintAssist.Hint="Download Path"
+                 VerticalAlignment="Center" Margin="10,0,10,0"
+                 Text="{Binding Source={x:Static properties:Settings.Default},Path=Path}"
+                  IsReadOnly ="True"
+                 >
+        </TextBox>
+        <Button Grid.Row="{StaticResource PathRow}" Grid.Column="{StaticResource ButtonColumn}"  Name="Path_Button" 
+                HorizontalAlignment="Left" VerticalAlignment="Center"  
+                FontSize="{StaticResource FontSize}"
+                Padding="0,0,0,0"
+                 Click="Path_Button_Click"
+                Style="{StaticResource MaterialDesignFlatButton}">
+            Browse
+        </Button>
+        <Button Grid.Row="{StaticResource NameProfileRow}" Grid.Column="{StaticResource ButtonColumn}"  Name="Name_Button" 
+                HorizontalAlignment="Left" VerticalAlignment="Center"  
+                FontSize="{StaticResource FontSize}"
+                Padding="0,0,0,0"
+                 Click="Name_Button_Click"
+                Style="{StaticResource MaterialDesignFlatButton}">
+            Edit
+        </Button>
+        <materialDesign:PackIcon Width="{StaticResource ImageDimension}" Height="{StaticResource ImageDimension}" Grid.Row="{StaticResource IncognitoRow}" Grid.Column="{StaticResource IconColumn}"  Kind="Incognito" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="{StaticResource IncognitoRow}" Grid.Column="{StaticResource TextColumn}"  Grid.ColumnSpan="{StaticResource ColumnSpan}" 
+				    x:Name="IncognitoText"
+                 FontSize="{StaticResource FontSize}"
+				    
+                 VerticalAlignment="Center" Margin="15,0,10,0"
+                 Text="Allow others to send you files"
+                  
+                 >
+        </TextBlock>
+        <ToggleButton Grid.Row="{StaticResource IncognitoRow}" Grid.Column="{StaticResource ButtonColumn}"  Name="Incognito"
+                
+            Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                HorizontalAlignment="Left" VerticalAlignment="Center"  
+                    Width="50"
+                      Height="30"
+                      Padding="0,0,0,0"
+                      IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=Incognito}"
+                      Click="Incognito_Button_Click"
+                >
+            <materialDesign:PackIcon Kind="EyeOff" Height="24" Width="24" />
+            <materialDesign:ToggleButtonAssist.OnContent>
+
+                <materialDesign:PackIcon Kind="Eye"/>
+            
+            </materialDesign:ToggleButtonAssist.OnContent>
+        </ToggleButton>
+        <materialDesign:PackIcon Width="{StaticResource ImageDimension}" Height="{StaticResource ImageDimension}" Grid.Row="{StaticResource RequestRow}" Grid.Column="{StaticResource IconColumn}"  Kind="Bell" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="{StaticResource RequestRow}" Grid.Column="{StaticResource TextColumn}"  Grid.ColumnSpan="{StaticResource ColumnSpan}" 
+				    x:Name="RequestText"
+                 FontSize="{StaticResource FontSize}"
+				    
+                 VerticalAlignment="Center" Margin="15,0,10,0"
+                 Text="Accept/Refuse Download Notification"
+                  
+                 >
+        </TextBlock>
+        <ToggleButton Grid.Row="{StaticResource RequestRow}" Grid.Column="{StaticResource ButtonColumn}"  Name="Request"
+                
+            Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                        HorizontalAlignment="Left" VerticalAlignment="Center"  
+                    Width="50"
+                      Height="30"
+                      Padding="0,0,0,0"
+                      IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=Request}"
+                      Click="Request_Click"
+                >
+            <materialDesign:PackIcon Kind="BellOff" Height="24" Width="24" />
+            <materialDesign:ToggleButtonAssist.OnContent>
+
+                <materialDesign:PackIcon Kind="Bell"/>
+
+            </materialDesign:ToggleButtonAssist.OnContent>
+        </ToggleButton>
+
+
+
+        <materialDesign:PackIcon Width="{StaticResource ImageDimension}" Height="{StaticResource ImageDimension}" Grid.Row="{StaticResource SelfDiscoveryRow}" Grid.Column="{StaticResource IconColumn}"  Kind="AccountSearch" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="{StaticResource SelfDiscoveryRow}" Grid.Column="{StaticResource TextColumn}"  Grid.ColumnSpan="{StaticResource ColumnSpan}" 
+				    x:Name="SelfDiscoveryText"
+                 FontSize="{StaticResource FontSize}"
+				    
+                 VerticalAlignment="Center" Margin="15,0,10,0"
+                 Text="Discovery Your Self"
+                  
+                 >
+        </TextBlock>
+        <ToggleButton Grid.Row="{StaticResource SelfDiscoveryRow}" Grid.Column="{StaticResource ButtonColumn}"  Name="SelfDiscovery"
+                
+            Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                        HorizontalAlignment="Left" VerticalAlignment="Center"  
+                    Width="50"
+                      Height="30"
+                      Padding="0,0,0,0"
+                      IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=DiscoverySelf}"
+                      Click="SelfDiscovery_Click"
+                >
+            <materialDesign:PackIcon Kind="AccountOff" Height="24" Width="24" />
+            <materialDesign:ToggleButtonAssist.OnContent>
+
+                <materialDesign:PackIcon Kind="Account"/>
+
+            </materialDesign:ToggleButtonAssist.OnContent>
+        </ToggleButton>
+
+        <materialDesign:PackIcon Width="{StaticResource ImageDimension}" Height="{StaticResource ImageDimension}" Grid.Row="{StaticResource DropFileRow}" Grid.Column="{StaticResource IconColumn}"  Kind="FileSend" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="{StaticResource DropFileRow}" Grid.Column="{StaticResource TextColumn}"  Grid.ColumnSpan="{StaticResource ColumnSpan}" 
+				    x:Name="DropFileText"
+                 FontSize="{StaticResource FontSize}"
+				    
+                 VerticalAlignment="Center" Margin="15,0,10,0"
+                 Text="Clear List of Files To Send When Sending"
+                  
+                 >
+        </TextBlock>
+        <ToggleButton Grid.Row="{StaticResource DropFileRow}" Grid.Column="{StaticResource ButtonColumn}"  Name="DropFIle"
+                
+            Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                        HorizontalAlignment="Left" VerticalAlignment="Center"  
+                    Width="50"
+                      Height="30"
+                      Padding="0,0,0,0"
+                      IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=DropFile}"
+                      Click="DropFIle_Click"
+                >
+            <materialDesign:PackIcon Kind="PencilOff" Height="24" Width="24" />
+            <materialDesign:ToggleButtonAssist.OnContent>
+
+                <materialDesign:PackIcon Kind="Pencil"/>
+
+            </materialDesign:ToggleButtonAssist.OnContent>
+        </ToggleButton>
+
+    </Grid>
+</Window>
